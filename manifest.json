@@ -1,0 +1,17 @@
+{
+  "name": "Quiz do Uso de Telas",
+  "short_name": "Quiz Telas",
+  "description": "Autoavaliação educativa sobre uso de telas e celulares",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#0F0A1E",
+  "theme_color": "#6C3FF5",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='32' fill='%236C3FF5'/><text y='140' x='40' font-size='120'>📱</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ]
+}
