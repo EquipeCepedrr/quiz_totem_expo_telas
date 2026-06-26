@@ -1,4 +1,4 @@
-const CACHE = "quiz-telas-v1";
+const CACHE = "quiz-telas-v2";
 const FILES = [
   "./",
   "./index.html"
