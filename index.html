@@ -406,7 +406,7 @@ html,body{
 </style>
 </head>
 <body>
-
+<button id="btn-acesso-adm" style="position: fixed; top: 15px; right: 15px; background: transparent; border: none; font-size: 26px; opacity: 0.15; cursor: pointer; z-index: 9999; color: #ffffff; padding: 10px;">⚙️</button>
 <div id="stars"></div>
 <div id="app">
 
@@ -935,6 +935,35 @@ registerSW();
 document.addEventListener("contextmenu",e=>e.preventDefault());
 document.addEventListener("selectstart",e=>e.preventDefault());
 document.addEventListener("touchstart",()=>{},{passive:true});
+// 1. MANTER TELA LIGADA
+let wakeLock = null;
+async function ativarWakeLock() {
+  if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen');
+}
+ativarWakeLock();
+document.addEventListener('visibilitychange', async () => {
+  if (wakeLock !== null && document.visibilityState === 'visible') await ativarWakeLock();
+});
+
+// 2. ACESSO COM SENHA
+document.getElementById('btn-acesso-adm').addEventListener('click', () => {
+  const senha = prompt('Senha:');
+  if (senha === '202600') {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-admin').classList.add('active');
+  } else if (senha !== null) {
+    alert('Senha incorreta!');
+  }
+});
+
+// 3. EXPORTAR PDF
+function exportarParaPDF() {
+  const estilo = document.createElement('style');
+  estilo.innerHTML = `@media print { body * { visibility: hidden; } #screen-admin, #screen-admin * { visibility: visible; } #screen-admin { position: absolute; left: 0; top: 0; width: 100%; } .btn-admin, #btn-acesso-adm { display: none !important; } }`;
+  document.head.appendChild(estilo);
+  window.print();
+  document.head.removeChild(estilo);
+}
 </script>
 </body>
 </html>
